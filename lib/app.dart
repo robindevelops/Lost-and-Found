@@ -1,7 +1,5 @@
 import 'package:authentication/core/providers/multi_provider.dart';
-import 'package:authentication/presentation/ui/authentication/signin_screen.dart';
-import 'package:authentication/presentation/ui/welcome/welcome_screen.dart';
-import 'package:authentication/spalsh.dart';
+import 'package:authentication/presentation/ui/splash/splash.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatefulWidget {

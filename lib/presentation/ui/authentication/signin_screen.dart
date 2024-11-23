@@ -15,9 +15,7 @@ class SigninScreen extends StatefulWidget {
 
 class _SigninScreenState extends State<SigninScreen> {
   final TextEditingController _email = TextEditingController();
-  final TextEditingController _username = TextEditingController();
   final TextEditingController _password = TextEditingController();
-  final TextEditingController _Cpassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +75,7 @@ class _SigninScreenState extends State<SigninScreen> {
             SizedBox(height: Dimensions.Height),
             CustomTextField(
               icon: Icon(Icons.password),
-              controller: _username,
+              controller: _password,
               hintText: "Enter Your Passoword",
               isPassword: true,
             ),

@@ -1,4 +1,5 @@
 import 'package:authentication/core/themes/app_themes.dart';
+import 'package:authentication/presentation/ui/widgets/custom_sheet.dart';
 import 'package:authentication/presentation/ui/dashboard/modules/home/widgets/product_card.dart';
 import 'package:authentication/presentation/ui/dashboard/widgets/clipper.dart';
 import 'package:flutter/material.dart';
@@ -57,6 +58,9 @@ class _AllitemsScreenState extends State<AllitemsScreen> {
                   ),
                 ),
                 InkWell(
+                  onTap: () {
+                    CustomModalBottomSheet.showCustomBottomSheet(context);
+                  },
                   child: Container(
                     height: 40,
                     width: 90,
