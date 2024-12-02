@@ -1,3 +1,4 @@
+import 'package:authentication/presentation/notifiers/filter_notifier.dart';
 import 'package:authentication/presentation/notifiers/tab_notifier.dart';
 import 'package:authentication/presentation/view_models/rootVm.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,11 @@ class MultiProviders extends StatelessWidget {
         ChangeNotifierProvider<TabNotifier>(
           create: (context) {
             return TabNotifier();
+          },
+        ),
+        ChangeNotifierProvider<FilterNotifier>(
+          create: (context) {
+            return FilterNotifier();
           },
         )
       ],

@@ -3,6 +3,7 @@ import 'package:authentication/core/utils/dimensions.dart';
 import 'package:authentication/presentation/ui/dashboard/dashboard_screen.dart';
 import 'package:authentication/presentation/ui/authentication/widgets/text_field.dart';
 import 'package:authentication/presentation/ui/widgets/app_elevated_button.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -104,10 +105,55 @@ class _SigninScreenState extends State<SigninScreen> {
                   ),
                 );
               },
-            )
+            ),
+            SizedBox(height: Dimensions.dividerHeight),
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                text: 'Joining our app means you agree with our ',
+                style: TextStyle(
+                  color: Colors.grey[700],
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                ),
+                children: [
+                  TextSpan(
+                    text: 'Terms of Use',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: AppThemes.Darkblue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = _onTermsOfUseTapped,
+                  ),
+                  TextSpan(
+                    text: ' and ',
+                  ),
+                  TextSpan(
+                    text: 'Privacy Policy',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: AppThemes.Darkblue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = _onPrivacyPolicyTapped,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+void _onTermsOfUseTapped() {
+  print('Terms of Use tapped');
+}
+
+void _onPrivacyPolicyTapped() {
+  print('Privacy Policy tapped');
 }

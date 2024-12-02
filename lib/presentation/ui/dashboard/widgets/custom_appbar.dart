@@ -1,5 +1,6 @@
 import 'package:authentication/presentation/ui/chats/chat_screen.dart';
 import 'package:authentication/presentation/ui/dashboard/widgets/clipper.dart';
+import 'package:authentication/presentation/ui/notification_screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppbar extends StatelessWidget {
@@ -75,7 +76,16 @@ class CustomAppbar extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return NotificationScreen();
+                      },
+                    ),
+                  );
+                },
                 icon: Icon(
                   Icons.notifications_none,
                   size: 35,
