@@ -1,9 +1,9 @@
 import 'package:authentication/core/themes/app_themes.dart';
-import 'package:authentication/presentation/ui/dashboard/modules/home/widgets/alert_dialog.dart';
 import 'package:authentication/presentation/ui/dashboard/modules/home/widgets/heading.dart';
 import 'package:authentication/presentation/ui/dashboard/widgets/custom_appbar.dart';
 import 'package:authentication/presentation/ui/dashboard/modules/home/widgets/category_card.dart';
 import 'package:authentication/presentation/ui/dashboard/modules/home/widgets/product_card.dart';
+import 'package:authentication/presentation/ui/widgets/add_report_button.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -42,33 +42,26 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         CategoryCard(title: 'Found'),
                         Heading(title: 'Recent Found items'),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              ProductCard(),
-                              ProductCard(),
-                              ProductCard(),
-                              ProductCard(),
-                              ProductCard(),
-                            ],
+                        SizedBox(
+                          height: 200,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 5,
+                            itemBuilder: (context, index) {
+                              return ProductCard();
+                            },
                           ),
                         ),
                         CategoryCard(title: 'Lost'),
-                        Heading(
-                          title: 'Recent Lost items',
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              ProductCard(),
-                              ProductCard(),
-                              ProductCard(),
-                              ProductCard(),
-                              ProductCard(),
-                            ],
+                        Heading(title: 'Recent Lost items'),
+                        SizedBox(
+                          height: 200,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 3,
+                            itemBuilder: (context, index) {
+                              return ProductCard();
+                            },
                           ),
                         ),
                       ],
@@ -77,42 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            Positioned(
-              bottom: 10,
-              left: 0,
-              right: 0,
-              child: Center(
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    backgroundColor: Colors.blue[800],
-                  ),
-                  icon: Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return CustomAlertDialog();
-                      },
-                    );
-                  },
-                  label: Text(
-                    "Add Report",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            AddReportButton(),
           ],
         ),
       ),
