@@ -13,6 +13,14 @@ class _LostScreenState extends State<LostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppThemes.appScaffoaldColor,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Text("No Item is Lost"),
+          ),
+        ],
+      ),
     );
   }
 }

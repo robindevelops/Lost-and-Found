@@ -1,6 +1,7 @@
 import 'package:authentication/core/constants/constants.dart';
 import 'package:authentication/core/themes/app_themes.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key});
@@ -10,6 +11,7 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  PageController controller = PageController();
   int _currentImageIndex = 0;
   final List<String> _imagePaths = [
     Constants.laptopImg,
@@ -41,6 +43,7 @@ class _DetailScreenState extends State<DetailScreen> {
               Container(
                 height: 300,
                 child: PageView.builder(
+                  controller: controller,
                   itemCount: _imagePaths.length,
                   onPageChanged: (index) {
                     setState(() {
@@ -58,24 +61,14 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
               Positioned(
                 bottom: 10,
-                left: 0,
+                left: 180,
                 right: 0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    _imagePaths.length,
-                    (index) => AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      margin: const EdgeInsets.symmetric(horizontal: 5),
-                      width: _currentImageIndex == index ? 12 : 8,
-                      height: 8,
-                      decoration: BoxDecoration(
-                        color: _currentImageIndex == index
-                            ? Colors.blue[800]
-                            : Colors.white,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                    ),
+                child: SmoothPageIndicator(
+                  controller: controller,
+                  count: _imagePaths.length,
+                  effect: WormEffect(
+                    dotColor: Colors.white,
+                    activeDotColor: AppThemes.Darkblue,
                   ),
                 ),
               ),
@@ -90,15 +83,48 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Time, Location, and Date Row
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // // Time, Location, and Date Row
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     _buildInfoCard(Icons.access_time, "Time", "12:00 PM"),
+                    //     _buildInfoCard(
+                    //         Icons.location_on, "Location", "New York"),
+                    //     _buildInfoCard(
+                    //         Icons.date_range, "Date", "Monday, May 19, 2022"),
+                    //   ],
+                    // ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildInfoCard(Icons.access_time, "Time", "12:00 PM"),
-                        _buildInfoCard(
-                            Icons.location_on, "Location", "New York"),
-                        _buildInfoCard(
-                            Icons.date_range, "Date", "Monday, May 19, 2022"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Time Lost:",
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            Text("10:30 AM"),
+                          ],
+                        ),
+                        SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Location:",
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            Text("Central Park"),
+                          ],
+                        ),
+                        SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Date:",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text("2024-12-04"),
+                          ],
+                        ),
                       ],
                     ),
                     SizedBox(height: 20),
@@ -161,46 +187,47 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
-  Widget _buildInfoCard(IconData icon, String title, String value) {
-    return Expanded(
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 5),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 8,
-              spreadRadius: 2,
-            ),
-          ],
-        ),
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          children: [
-            Icon(icon, color: Colors.blue[800], size: 30),
-            SizedBox(height: 8),
-            Text(
-              title,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.grey[700],
-              ),
-            ),
-            SizedBox(height: 5),
-            Text(
-              value,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[600],
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+//   Widget _buildInfoCard(IconData icon, String title, String value) {
+//     return Expanded(
+//       child: Container(
+//         margin: const EdgeInsets.symmetric(horizontal: 5),
+//         decoration: BoxDecoration(
+//           color: Colors.white,
+//           borderRadius: BorderRadius.circular(15),
+//           boxShadow: [
+//             BoxShadow(
+//               color: Colors.black12,
+//               blurRadius: 8,
+//               spreadRadius: 2,
+//             ),
+//           ],
+//         ),
+//         padding: const EdgeInsets.all(15),
+//         child: Column(
+//           children: [
+//             Icon(icon, color: Colors.blue[800], size: 30),
+//             SizedBox(height: 8),
+//             Text(
+//               title,
+//               style: TextStyle(
+//                 fontWeight: FontWeight.bold,
+//                 fontSize: 16,
+//                 color: Colors.grey[700],
+//               ),
+//             ),
+//             SizedBox(height: 5),
+//             Text(
+//               value,
+//               style: TextStyle(
+//                 fontSize: 14,
+//                 color: Colors.grey[600],
+//               ),
+//               textAlign: TextAlign.center,
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 }
