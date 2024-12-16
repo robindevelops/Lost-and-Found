@@ -1,5 +1,4 @@
 import 'package:authentication/core/providers/multi_provider.dart';
-import 'package:authentication/presentation/ui/dashboard/modules/detail/detail_screen.dart';
 import 'package:authentication/presentation/ui/splash/splash.dart';
 import 'package:flutter/material.dart';
 

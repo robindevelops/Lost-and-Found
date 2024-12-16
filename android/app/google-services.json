@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "122471947120",
+    "project_id": "lost-found-90a27",
+    "storage_bucket": "lost-found-90a27.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122471947120:android:f0c14d339ea52d1800cdb5",
+        "android_client_info": {
+          "package_name": "com.alyan.lost"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCi82-dGsuv8-VReqSWh0qX31HHA7SUI_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122471947120:android:7d4c0e8c85060e7a00cdb5",
+        "android_client_info": {
+          "package_name": "com.alyan.lostfound"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCi82-dGsuv8-VReqSWh0qX31HHA7SUI_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122471947120:android:281ead4ff95a681100cdb5",
+        "android_client_info": {
+          "package_name": "com.lostandfound.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCi82-dGsuv8-VReqSWh0qX31HHA7SUI_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
