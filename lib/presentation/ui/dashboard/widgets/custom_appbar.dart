@@ -4,7 +4,8 @@ import 'package:authentication/presentation/ui/notification_screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppbar extends StatelessWidget {
-  const CustomAppbar({
+  TextEditingController searchcontroller = TextEditingController();
+  CustomAppbar({
     super.key,
   });
 
@@ -23,6 +24,7 @@ class CustomAppbar extends StatelessWidget {
                 child: SizedBox(
                   height: 45,
                   child: TextField(
+                    controller: searchcontroller,
                     cursorColor: Colors.black,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(5),

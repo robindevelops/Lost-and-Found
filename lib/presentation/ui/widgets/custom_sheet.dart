@@ -15,147 +15,172 @@ class CustomModalBottomSheet {
       ),
       backgroundColor: AppThemes.appScaffoaldColor,
       context: context,
-      builder: (context) => Container(
-        height: MediaQuery.of(context).size.height / 1.5,
+      builder: (context) => SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Sorting Chips
-                Text(
-                  "Sort By",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: Colors.blue[800],
+          padding: const EdgeInsets.fromLTRB(20, 15, 20, 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header
+              Center(
+                child: Container(
+                  width: 50,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[400],
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                SizedBox(height: 10),
-                Row(
-                  children: [
-                    ChoiceChip(
-                      label: Text("Newest"),
-                      selected: false,
-                      onSelected: (isSelected) {},
-                    ),
-                    SizedBox(width: 10),
-                    ChoiceChip(
-                      label: Text("Oldest"),
-                      selected: false,
-                      onSelected: (isSelected) {
-                        // Handle Oldest selection
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
+              ),
+              const SizedBox(height: 20),
 
-                // Filters
-                Text(
-                  "Filters",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: Colors.blue[800],
+              // Title
+              Center(
+                child: Text(
+                  "Filter & Sort",
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueGrey[900],
+                      ),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Sort By Section
+              _sectionHeader("Sort By", context),
+              Row(
+                children: [
+                  _buildChoiceChip(
+                    "Newest",
+                    selected: true,
+                    onSelected: (isSelected) {},
                   ),
-                ),
-                SizedBox(height: 10),
-
-                // Date Reported TextField
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: "Date Reported",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    prefixIcon: Icon(Icons.date_range),
+                  const SizedBox(width: 10),
+                  _buildChoiceChip(
+                    "Oldest",
+                    selected: false,
+                    onSelected: (isSelected) {},
                   ),
-                ),
-                SizedBox(height: 15),
+                ],
+              ),
+              const SizedBox(height: 25),
 
-                // Location TextField
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: "Location",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    prefixIcon: Icon(Icons.location_on),
-                  ),
-                ),
-                SizedBox(height: 20),
+              // Filters Section
+              _sectionHeader("Filters", context),
+              _customTextField(
+                context,
+                labelText: "Date Reported",
+                icon: Icons.date_range,
+                onTap: () {
+                  // Add date picker logic
+                },
+              ),
+              const SizedBox(height: 15),
+              _customTextField(
+                context,
+                labelText: "Location",
+                icon: Icons.location_on,
+              ),
+              const SizedBox(height: 25),
 
-                // Category Chips
-                Text(
-                  "Category",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: Colors.blue[800],
-                  ),
-                ),
-                SizedBox(height: 10),
-                Wrap(
-                  spacing: 10,
-                  children: [
-                    ChoiceChip(
-                      label: Text("All"),
-                      selected: false,
-                      onSelected: (isSelected) {
-                        // Handle All category selection
-                      },
-                    ),
-                    ChoiceChip(
-                      label: Text("Wallet"),
-                      selected: false,
-                      onSelected: (isSelected) {
-                        // Handle Wallet category selection
-                      },
-                    ),
-                    ChoiceChip(
-                      label: Text("Keys"),
-                      selected: false,
-                      onSelected: (isSelected) {
-                        // Handle Keys category selection
-                      },
-                    ),
-                    ChoiceChip(
-                      label: Text("Bag"),
-                      selected: false,
-                      onSelected: (isSelected) {
-                        // Handle Bag category selection
-                      },
-                    ),
-                    ChoiceChip(
-                      label: Text("Phone"),
-                      selected: false,
-                      onSelected: (isSelected) {
-                        // Handle Phone category selection
-                      },
-                    ),
-                    ChoiceChip(
-                      label: Text("Other"),
-                      selected: false,
-                      onSelected: (isSelected) {
-                        // Handle Other category selection
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
+              // Category Section
+              _sectionHeader("Category", context),
+              Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: [
+                  _buildChoiceChip("All",
+                      selected: true, onSelected: (isSelected) {}),
+                  _buildChoiceChip("Wallet",
+                      selected: false, onSelected: (isSelected) {}),
+                  _buildChoiceChip("Keys",
+                      selected: false, onSelected: (isSelected) {}),
+                  _buildChoiceChip("Bag",
+                      selected: false, onSelected: (isSelected) {}),
+                  _buildChoiceChip("Phone",
+                      selected: false, onSelected: (isSelected) {}),
+                  _buildChoiceChip("Other",
+                      selected: false, onSelected: (isSelected) {}),
+                ],
+              ),
+              const SizedBox(height: 30),
 
-                // Button
-                AppElevatedButton(
-                  text: "Show",
-                  onPressed: () {},
-                )
-              ],
-            ),
+              // Show Button
+              Center(
+                child: AppElevatedButton(
+                  text: "Apply Filters",
+                  onPressed: () {
+                    // Handle Apply Filters
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ),
+    );
+  }
+
+  // Helper Widget: Section Header
+  static Widget _sectionHeader(String title, BuildContext context) {
+    return Text(
+      title,
+      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: Colors.blueGrey[800],
+          ),
+    );
+  }
+
+  // Helper Widget: Custom Text Field
+  static Widget _customTextField(BuildContext context,
+      {required String labelText,
+      required IconData icon,
+      VoidCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: TextField(
+        readOnly: onTap != null,
+        decoration: InputDecoration(
+          labelText: labelText,
+          labelStyle: TextStyle(color: Colors.grey[700]),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          prefixIcon: Icon(icon, color: Colors.blueGrey[700]),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey[300]!),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blueGrey[400]!),
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Helper Widget: Choice Chip
+  static Widget _buildChoiceChip(
+    String label, {
+    required bool selected,
+    required ValueChanged<bool> onSelected,
+  }) {
+    return ChoiceChip(
+      checkmarkColor: Colors.white,
+      label: Text(
+        label,
+        style: TextStyle(
+          color: selected ? Colors.white : Colors.grey[800],
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      selected: selected,
+      onSelected: onSelected,
+      selectedColor: const Color.fromARGB(255, 17, 83, 136),
+      backgroundColor: Colors.grey[200],
+      elevation: 2,
     );
   }
 }

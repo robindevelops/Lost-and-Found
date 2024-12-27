@@ -1,7 +1,6 @@
+import 'package:authentication/core/constants/constants.dart';
 import 'package:authentication/core/themes/app_themes.dart';
 import 'package:authentication/presentation/ui/widgets/custom_sheet.dart';
-import 'package:authentication/presentation/ui/dashboard/modules/home/widgets/product_card.dart';
-import 'package:authentication/presentation/ui/dashboard/widgets/clipper.dart';
 import 'package:flutter/material.dart';
 
 class AllitemsScreen extends StatefulWidget {
@@ -12,88 +11,174 @@ class AllitemsScreen extends StatefulWidget {
 }
 
 class _AllitemsScreenState extends State<AllitemsScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppThemes.appScaffoaldColor,
-      body: Column(
-        children: [
-          ClipPath(
-            clipper: BottomCurveClipper(),
-            child: Container(
-              alignment: Alignment.centerLeft,
-              height: 100,
-              width: double.infinity,
-              color: Colors.blue[800],
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 30),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(
-                        Icons.arrow_back,
-                        size: 30,
-                        color: Colors.white,
-                      ),
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: AppThemes.Darkblue,
+        // elevation: 1,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search, color: Colors.white),
+            onPressed: () {
+              // Add search functionality
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.filter_list, color: Colors.white),
+            onPressed: () {
+              // Add filter functionality
+              CustomModalBottomSheet.showCustomBottomSheet(context);
+            },
+          ),
+        ],
+      ),
+      body: RefreshIndicator(
+        backgroundColor: Colors.white,
+        color: AppThemes.Mediumblue,
+        onRefresh: () {
+          return Future.delayed(
+            Duration(seconds: 2),
+          );
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // NoItemFoundCard(
+            //   message: "We couldn't find anything matching your search.",
+            //   onRetry: () {
+            //     print("Retry clicked!");
+            //   },
+            // ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text.rich(
+                    TextSpan(
+                      text: "Showing: ",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      children: [
+                        TextSpan(
+                          text: "Result of geniue pig",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(width: 10),
+                  // DropdownButton(
+                  //   menuMaxHeight: 4,
+                  //   iconSize: 10,
+                  //   items: [
+                  //     DropdownMenuItem(
+                  //       child: Text("SortBy"),
+                  //     ),
+                  //     DropdownMenuItem(
+                  //       child: Text("Newly lost"),
+                  //     ),
+                  //     DropdownMenuItem(
+                  //       child: Text(""),
+                  //     ),
+                  //     DropdownMenuItem(
+                  //       child: Text("Old lost"),
+                  //     ),
+                  //   ],
+                  //   onChanged: (value) {},
+                  // )
+                ],
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "All items",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    CustomModalBottomSheet.showCustomBottomSheet(context);
-                  },
-                  child: Container(
-                    height: 40,
-                    width: 90,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.grey.shade400),
-                    ),
-                    child: Center(
-                      child: Text("Filter"),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+
+            Expanded(
               child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200, // Maximum width for each item
-                  crossAxisSpacing: 8.0, // Space between columns
-                  mainAxisSpacing: 19.0, // Space between rows
-                  childAspectRatio: 0.9, // Aspect ratio of the grid items
+                physics: BouncingScrollPhysics(),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 0.8,
                 ),
-                itemCount: 10,
+                itemCount: 10, // Number of items
                 itemBuilder: (context, index) {
-                  return ProductCard();
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          blurRadius: 5,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.vertical(
+                                  top: Radius.circular(10)),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                  Constants.laptopImg,
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                "Item Name",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                "₹ 1,200",
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                "Location • 2 days ago",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
                 },
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

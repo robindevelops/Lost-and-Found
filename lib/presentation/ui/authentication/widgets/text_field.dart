@@ -8,14 +8,15 @@ class CustomTextField extends StatefulWidget {
   String hintText;
   Icon icon;
   bool? isPassword;
+  String? Function(String?)? validator;
 
-  CustomTextField({
-    super.key,
-    required this.controller,
-    required this.hintText,
-    required this.icon,
-    this.isPassword = false, // Default to false
-  });
+  CustomTextField(
+      {super.key,
+      required this.controller,
+      required this.hintText,
+      required this.icon,
+      this.isPassword = false, // Default to false,
+      this.validator});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -26,9 +27,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       cursorColor: Colors.black,
       controller: widget.controller,
+      validator: widget.validator,
       obscureText: widget.isPassword == true ? _obscureText : false,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(vertical: 20),
@@ -47,9 +49,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               )
             : null,
         hintText: widget.hintText,
-        hintStyle: GoogleFonts.aBeeZee(color: Colors.black, fontSize: 17),
-        // Remove border and filled color
-
+        hintStyle: GoogleFonts.aBeeZee(color: Colors.black, fontSize: 15),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             color: const Color.fromARGB(
@@ -67,7 +67,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               2,
               60,
               127,
-            ), // Blue underline when field is focused
+            ),
           ),
         ),
       ),

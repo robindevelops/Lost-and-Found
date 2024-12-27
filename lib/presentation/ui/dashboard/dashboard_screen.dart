@@ -37,6 +37,13 @@ class DashboardScreen extends StatelessWidget {
               size: 30,
             ),
           ),
+          BottomNavigationBarItem(
+            label: "Profile",
+            icon: Icon(
+              Icons.person,
+              size: 30,
+            ),
+          ),
         ],
       ),
     );
