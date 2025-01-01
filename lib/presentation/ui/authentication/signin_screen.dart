@@ -1,3 +1,4 @@
+import 'package:authentication/core/routes/router.dart';
 import 'package:authentication/core/themes/app_themes.dart';
 import 'package:authentication/core/utils/dimensions.dart';
 import 'package:authentication/presentation/ui/authentication/resetpassword_screen.dart';
@@ -6,6 +7,7 @@ import 'package:authentication/presentation/ui/authentication/widgets/text_field
 import 'package:authentication/presentation/ui/widgets/app_elevated_button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -107,14 +109,15 @@ class _SigninScreenState extends State<SigninScreen> {
               AppElevatedButton(
                 text: "Login",
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return DashboardScreen();
-                      },
-                    ),
-                  );
+                  context.push(AppRouter.homePage);
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) {
+                  //       return DashboardScreen();
+                  //     },
+                  //   ),
+                  // );
                 },
               ),
               SizedBox(height: Dimensions.dividerHeight),

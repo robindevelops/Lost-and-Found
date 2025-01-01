@@ -1,4 +1,6 @@
 import 'package:authentication/core/themes/app_themes.dart';
+import 'package:authentication/core/utils/dimensions.dart';
+import 'package:authentication/presentation/ui/dashboard/modules/detail/detail_screen.dart';
 import 'package:authentication/presentation/ui/dashboard/modules/home/widgets/heading.dart';
 import 'package:authentication/presentation/ui/dashboard/widgets/custom_appbar.dart';
 import 'package:authentication/presentation/ui/dashboard/modules/home/widgets/category_card.dart';
@@ -40,20 +42,33 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: Column(
                       children: [
-                        CategoryCard(title: 'Found'),
-                        Heading(title: 'Recent Found items'),
+                        CategoryCard(title: 'Cateogories'),
+                        Heading(title: 'Recent Lost items'),
                         SizedBox(
                           height: 200,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: 5,
                             itemBuilder: (context, index) {
-                              return ProductCard();
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return DetailScreen();
+                                      },
+                                    ),
+                                  );
+                                },
+                                child: ProductCard(),
+                              );
                             },
                           ),
                         ),
-                        CategoryCard(title: 'Lost'),
-                        Heading(title: 'Recent Lost items'),
+                        // CategoryCard(title: 'Lost'),
+                        SizedBox(height: Dimensions.dividerHeight * 2),
+                        Heading(title: 'Mobiles'),
                         SizedBox(
                           height: 200,
                           child: ListView.builder(

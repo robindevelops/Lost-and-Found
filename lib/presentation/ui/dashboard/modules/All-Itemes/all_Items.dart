@@ -19,21 +19,21 @@ class _AllitemsScreenState extends State<AllitemsScreen> {
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: AppThemes.Darkblue,
         // elevation: 1,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.white),
-            onPressed: () {
-              // Add search functionality
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.filter_list, color: Colors.white),
-            onPressed: () {
-              // Add filter functionality
-              CustomModalBottomSheet.showCustomBottomSheet(context);
-            },
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(Icons.search, color: Colors.white),
+        //     onPressed: () {
+        //       // Add search functionality
+        //     },
+        //   ),
+        //   IconButton(
+        //     icon: const Icon(Icons.filter_list, color: Colors.white),
+        //     onPressed: () {
+        //       // Add filter functionality
+        //       CustomModalBottomSheet.showCustomBottomSheet(context);
+        //     },
+        //   ),
+        // ],
       ),
       body: RefreshIndicator(
         backgroundColor: Colors.white,
@@ -53,8 +53,47 @@ class _AllitemsScreenState extends State<AllitemsScreen> {
             //     print("Retry clicked!");
             //   },
             // ),
+
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search for items...',
+                    border: InputBorder.none,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.grey[600],
+                    ),
+                    suffixIcon: IconButton(
+                      icon: const Icon(
+                        Icons.filter_list,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        CustomModalBottomSheet.showCustomBottomSheet(context);
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
               child: Row(
                 children: [
                   Text.rich(
@@ -72,30 +111,9 @@ class _AllitemsScreenState extends State<AllitemsScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(width: 10),
-                  // DropdownButton(
-                  //   menuMaxHeight: 4,
-                  //   iconSize: 10,
-                  //   items: [
-                  //     DropdownMenuItem(
-                  //       child: Text("SortBy"),
-                  //     ),
-                  //     DropdownMenuItem(
-                  //       child: Text("Newly lost"),
-                  //     ),
-                  //     DropdownMenuItem(
-                  //       child: Text(""),
-                  //     ),
-                  //     DropdownMenuItem(
-                  //       child: Text("Old lost"),
-                  //     ),
-                  //   ],
-                  //   onChanged: (value) {},
-                  // )
                 ],
               ),
             ),
-
             Expanded(
               child: GridView.builder(
                 physics: BouncingScrollPhysics(),
@@ -105,7 +123,7 @@ class _AllitemsScreenState extends State<AllitemsScreen> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  childAspectRatio: 0.8,
+                  childAspectRatio: 0.9 / 1,
                 ),
                 itemCount: 10, // Number of items
                 itemBuilder: (context, index) {

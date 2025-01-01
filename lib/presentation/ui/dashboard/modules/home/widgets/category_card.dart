@@ -1,3 +1,4 @@
+import 'package:authentication/core/utils/logger.dart';
 import 'package:authentication/presentation/ui/dashboard/modules/home/widgets/items.dart';
 import 'package:flutter/material.dart';
 
@@ -27,22 +28,29 @@ class CategoryCard extends StatelessWidget {
                   items(
                     itemname: 'Wallet',
                     iconData: Icons.wallet,
+                    onTap: () {
+                      Log.i("wallet");
+                    },
                   ),
                   items(
                     itemname: 'Mobile',
                     iconData: Icons.mobile_screen_share_sharp,
+                    onTap: () {},
                   ),
                   items(
                     itemname: 'Tablet',
                     iconData: Icons.tablet_mac,
+                    onTap: () {},
                   ),
                   items(
                     itemname: 'Watch',
                     iconData: Icons.watch,
+                    onTap: () {},
                   ),
                   items(
                     itemname: 'Keys',
                     iconData: Icons.key,
+                    onTap: () {},
                   ),
                 ],
               ),
@@ -51,15 +59,15 @@ class CategoryCard extends StatelessWidget {
         ),
         Positioned(
           top: 15,
-          left: 40,
+          left: 20,
           child: Container(
-            color: Colors.white,
+            // color: Colors.white,
             child: Text(
               title,
               style: TextStyle(
                 color: const Color.fromARGB(255, 4, 83, 174),
                 fontWeight: FontWeight.bold,
-                fontSize: 22,
+                fontSize: 19,
               ),
             ),
           ),

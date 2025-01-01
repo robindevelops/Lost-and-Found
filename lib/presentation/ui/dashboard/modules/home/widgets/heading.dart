@@ -15,7 +15,7 @@ class Heading extends StatelessWidget {
           style: TextStyle(
             color: Colors.blue[800],
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: 18,
           ),
         ),
         TextButton(

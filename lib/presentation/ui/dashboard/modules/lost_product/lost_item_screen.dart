@@ -34,13 +34,6 @@ class _LostItemScreenState extends State<LostItemScreen> {
       backgroundColor: AppThemes.appScaffoaldColor,
       appBar: AppBar(
         backgroundColor: AppThemes.appScaffoaldColor,
-        title: Text(
-          "Back",
-          style: TextStyle(
-            color: Colors.blue[800],
-            fontWeight: FontWeight.bold,
-          ),
-        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 20),
@@ -48,21 +41,39 @@ class _LostItemScreenState extends State<LostItemScreen> {
           children: [
             Expanded(
               child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    buildTextField("Category", categoryController),
-                    SizedBox(height: 15),
-                    buildTextField("Title of Report", titleController),
-                    SizedBox(height: 15),
                     buildTextField(
-                        "Where did you lose it?", locationController),
-                    SizedBox(height: 15),
+                      "Category",
+                      categoryController,
+                      "Enter the category of the lost item",
+                    ),
+                    const SizedBox(height: 15),
                     buildTextField(
-                        "When did you last see it?", lastSeenController),
-                    SizedBox(height: 15),
-                    buildTextField("Additional Notes", notesController),
-                    SizedBox(height: 40),
+                      "Title of Report",
+                      titleController,
+                      "Enter a title for your report",
+                    ),
+                    const SizedBox(height: 15),
+                    buildTextField(
+                      "Where did you lose it?",
+                      locationController,
+                      "Enter the location where you lost it",
+                    ),
+                    const SizedBox(height: 15),
+                    buildTextField(
+                      "When did you last see it?",
+                      lastSeenController,
+                      "Enter the last time you saw the item",
+                    ),
+                    const SizedBox(height: 15),
+                    buildTextField(
+                      "Additional Notes",
+                      notesController,
+                      "Enter any additional details",
+                    ),
+                    const SizedBox(height: 40),
                     Container(
                       width: double.infinity,
                       height: 50,
@@ -72,11 +83,12 @@ class _LostItemScreenState extends State<LostItemScreen> {
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: const [
                           Icon(
                             Icons.upload_rounded,
                             color: Colors.black,
                           ),
+                          SizedBox(width: 10),
                           Text(
                             "Choose Photo",
                             style: TextStyle(
@@ -91,29 +103,11 @@ class _LostItemScreenState extends State<LostItemScreen> {
                 ),
               ),
             ),
-            // Spacer to push the button to the bottom
-            // ElevatedButton(
-            //   style: ElevatedButton.styleFrom(
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(10),
-            //     ),
-            //     backgroundColor: Colors.blue[800],
-            //     minimumSize: Size(double.infinity, 60),
-            //   ),
-            //   onPressed: () {},
-            //   child: Text(
-            //     "Report it",
-            //     style: TextStyle(
-            //       color: Colors.white,
-            //       fontWeight: FontWeight.bold,
-            //       fontSize: 16,
-            //     ),
-            //   ),
-            // ),
-
             AppElevatedButton(
               text: "Report it",
-              onPressed: () {},
+              onPressed: () {
+                // Handle button press logic
+              },
             ),
           ],
         ),
@@ -122,7 +116,11 @@ class _LostItemScreenState extends State<LostItemScreen> {
   }
 }
 
-Widget buildTextField(String title, TextEditingController controller) {
+Widget buildTextField(
+  String title,
+  TextEditingController controller,
+  String hintText,
+) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -131,33 +129,25 @@ Widget buildTextField(String title, TextEditingController controller) {
         style: TextStyle(
           color: Colors.blue[800],
           fontWeight: FontWeight.w600,
-          fontSize: 24,
+          fontSize: 20,
         ),
       ),
-      TextField(
-        controller: controller,
-        decoration: InputDecoration(
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              width: 2,
-              color: const Color.fromARGB(
-                255,
-                2,
-                60,
-                127,
-              ), // Blue
-            ),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              width: 2,
-              color: const Color.fromARGB(
-                255,
-                2,
-                60,
-                127,
-              ),
-            ),
+      const SizedBox(height: 10),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: TextField(
+          controller: controller,
+          decoration: InputDecoration(
+            hintText: hintText,
+            hintStyle: const TextStyle(color: Colors.grey),
+            border: InputBorder.none, // Remove default border
+            contentPadding: const EdgeInsets.symmetric(vertical: 12.0),
+            focusedBorder: InputBorder.none, // Remove focus border
+            enabledBorder: InputBorder.none, // Remove enabled border
           ),
         ),
       ),

@@ -1,5 +1,5 @@
 import 'package:authentication/core/providers/multi_provider.dart';
-import 'package:authentication/presentation/ui/splash/splash.dart';
+import 'package:authentication/core/routes/router.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatefulWidget {
@@ -13,9 +13,14 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MultiProviders(
-      child: MaterialApp(
+      child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        routeInformationProvider: AppRouter.router.routeInformationProvider,
+        routeInformationParser: AppRouter.router.routeInformationParser,
+        routerDelegate: AppRouter.router.routerDelegate,
+        backButtonDispatcher: AppRouter.router.backButtonDispatcher,
+
+        // home: SplashScreen(),
       ),
     );
   }
