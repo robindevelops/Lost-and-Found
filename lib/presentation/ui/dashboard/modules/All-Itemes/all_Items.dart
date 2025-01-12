@@ -1,6 +1,6 @@
 import 'package:authentication/core/constants/constants.dart';
 import 'package:authentication/core/themes/app_themes.dart';
-import 'package:authentication/presentation/ui/widgets/custom_sheet.dart';
+import 'package:authentication/presentation/search/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class AllitemsScreen extends StatefulWidget {
@@ -11,95 +11,113 @@ class AllitemsScreen extends StatefulWidget {
 }
 
 class _AllitemsScreenState extends State<AllitemsScreen> {
+  String? selectedValue; // Currently selected value
+
+  final List<String> items = [
+    'Newest First', // Sort items by the most recent posts
+    'Oldest First', // Sort items by the oldest posts
+  ];
+// Dropdown items
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: AppThemes.Darkblue,
-        // elevation: 1,
-        // actions: [
-        //   IconButton(
-        //     icon: const Icon(Icons.search, color: Colors.white),
-        //     onPressed: () {
-        //       // Add search functionality
-        //     },
-        //   ),
-        //   IconButton(
-        //     icon: const Icon(Icons.filter_list, color: Colors.white),
-        //     onPressed: () {
-        //       // Add filter functionality
-        //       CustomModalBottomSheet.showCustomBottomSheet(context);
-        //     },
-        //   ),
-        // ],
+        actions: [
+          IconButton(
+            onPressed: () async {
+              String? value = await showMenu(
+                context: context,
+                position: const RelativeRect.fromLTRB(100, 100, 0, 0),
+                items: items
+                    .map(
+                      (item) => PopupMenuItem<String>(
+                        value: item,
+                        child: Text(item),
+                      ),
+                    )
+                    .toList(),
+              );
+              if (value != null) {
+                setState(() {
+                  selectedValue = value; // Update selected value
+                });
+              }
+            },
+            icon: const Icon(Icons.sort),
+            // tooltip: 'Select an option',
+          ),
+        ],
       ),
       body: RefreshIndicator(
         backgroundColor: Colors.white,
         color: AppThemes.Mediumblue,
         onRefresh: () {
           return Future.delayed(
-            Duration(seconds: 2),
+            const Duration(seconds: 2),
           );
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // NoItemFoundCard(
-            //   message: "We couldn't find anything matching your search.",
-            //   onRetry: () {
-            //     print("Retry clicked!");
-            //   },
-            // ),
-
+            // Search Field
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SearchScreen(),
                     ),
-                  ],
-                ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search for items...',
-                    border: InputBorder.none,
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Colors.grey[600],
-                    ),
-                    suffixIcon: IconButton(
-                      icon: const Icon(
-                        Icons.filter_list,
-                        color: Colors.grey,
+                  );
+                },
+                child: Container(
+                  height: 55,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
                       ),
-                      onPressed: () {
-                        CustomModalBottomSheet.showCustomBottomSheet(context);
-                      },
-                    ),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      const SizedBox(width: 10),
+                      const Icon(Icons.search, color: Colors.grey),
+                      const SizedBox(width: 10),
+                      Text(
+                        "Search your Products",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
+
+            // Result Header
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
               child: Row(
                 children: [
                   Text.rich(
                     TextSpan(
                       text: "Showing: ",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                       children: [
                         TextSpan(
                           text: "Result of geniue pig",
@@ -114,18 +132,18 @@ class _AllitemsScreenState extends State<AllitemsScreen> {
                 ],
               ),
             ),
+            // GridView
             Expanded(
               child: GridView.builder(
-                physics: BouncingScrollPhysics(),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                   childAspectRatio: 0.9 / 1,
                 ),
-                itemCount: 10, // Number of items
+                itemCount: 10,
                 itemBuilder: (context, index) {
                   return Container(
                     decoration: BoxDecoration(
@@ -146,7 +164,8 @@ class _AllitemsScreenState extends State<AllitemsScreen> {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: const BorderRadius.vertical(
-                                  top: Radius.circular(10)),
+                                top: Radius.circular(10),
+                              ),
                               image: DecorationImage(
                                 image: AssetImage(
                                   Constants.laptopImg,

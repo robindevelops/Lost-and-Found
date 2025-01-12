@@ -1,9 +1,7 @@
-import 'package:authentication/core/routes/route.navigation.observer.dart';
 import 'package:authentication/presentation/ui/authentication/resetpassword_screen.dart';
 import 'package:authentication/presentation/ui/authentication/signin_screen.dart';
 import 'package:authentication/presentation/ui/authentication/signup_screen.dart';
 import 'package:authentication/presentation/ui/dashboard/dashboard_screen.dart';
-import 'package:authentication/presentation/ui/dashboard/modules/home/home_screen.dart';
 import 'package:authentication/presentation/ui/splash/splash.dart';
 import 'package:authentication/presentation/ui/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';

@@ -2,7 +2,6 @@ import 'package:authentication/core/routes/router.dart';
 import 'package:authentication/core/themes/app_themes.dart';
 import 'package:authentication/core/utils/dimensions.dart';
 import 'package:authentication/presentation/ui/authentication/resetpassword_screen.dart';
-import 'package:authentication/presentation/ui/dashboard/dashboard_screen.dart';
 import 'package:authentication/presentation/ui/authentication/widgets/text_field.dart';
 import 'package:authentication/presentation/ui/widgets/app_elevated_button.dart';
 import 'package:flutter/gestures.dart';

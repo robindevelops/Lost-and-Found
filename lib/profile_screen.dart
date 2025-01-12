@@ -1,149 +1,137 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  @override
   Widget build(BuildContext context) {
+    const screenBackgroundColor = Colors.white;
+    const primaryColor = Colors.blue;
+
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Profile Header
-              Stack(
-                clipBehavior: Clip.none,
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    height: 150,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Colors.blue, Colors.blueAccent],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  Positioned(
-                    top: 100,
-                    child: CircleAvatar(
-                      radius: 50,
-                      backgroundColor: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 70),
-
-              // Name and Email
-              const Text(
-                'John Doe',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
+      backgroundColor: screenBackgroundColor,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 8),
+                CircleAvatar(
+                  radius: 50,
+                  backgroundColor: screenBackgroundColor,
+                  backgroundImage: const NetworkImage(
+                      "https://avatar.iran.liara.run/public"),
                 ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'johndoe@example.com',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
+                const SizedBox(height: 16),
+                Text(
+                  "Muhammad Abdullah",
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 24),
-
-              // Settings Cards
-              Column(
-                children: [
-                  settingsCard(
-                    icon: Icons.lock,
-                    title: 'Change Password',
-                    onTap: () {
-                      // Handle Change Password
-                    },
-                  ),
-                  settingsCard(
-                    icon: Icons.notifications,
-                    title: 'Notifications',
-                    onTap: () {
-                      // Handle Notifications
-                    },
-                  ),
-                  settingsCard(
-                    icon: Icons.privacy_tip,
-                    title: 'Privacy Settings',
-                    onTap: () {
-                      // Handle Privacy Settings
-                    },
-                  ),
-                  settingsCard(
-                    icon: Icons.logout,
-                    title: 'Logout',
-                    onTap: () {
-                      // Handle Logout
-                    },
-                    color: Colors.redAccent,
-                    textColor: Colors.white,
-                  ),
-                ],
-              ),
-            ],
+                const SizedBox(height: 8),
+                _sectionTitle("Account"),
+                ProfileListTile(
+                  icon: "assets/icons/profile.svg",
+                  title: "Profile",
+                  onTap: () {},
+                ),
+                ProfileListTile(
+                  icon: "assets/icons/lock.svg",
+                  title: "Change Password",
+                  onTap: () {},
+                ),
+                ProfileListTile(
+                  icon: "assets/icons/notification.svg",
+                  title: "Notification Setting",
+                  onTap: () {},
+                ),
+                _sectionTitle("More"),
+                ProfileListTile(
+                  icon: "assets/icons/privacy.svg",
+                  title: "Privacy Policy",
+                  onTap: () {},
+                ),
+                ProfileListTile(
+                  icon: "assets/icons/language.svg",
+                  title: "Language",
+                  onTap: () {},
+                ),
+                ProfileListTile(
+                  icon: "assets/icons/terms.svg",
+                  title: "Terms & Conditions",
+                  onTap: () {},
+                ),
+                ProfileListTile(
+                  icon: "assets/icons/help.svg",
+                  title: "Help",
+                  onTap: () {},
+                ),
+                ProfileListTile(
+                  icon: "assets/icons/delete.svg",
+                  title: "Delete Account",
+                  onTap: () {},
+                ),
+                ProfileListTile(
+                  icon: "assets/icons/logout.svg",
+                  title: "Logout",
+                  onTap: () {},
+                ),
+                const SizedBox(height: 24),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget settingsCard({
-    required IconData icon,
-    required String title,
-    required VoidCallback onTap,
-    Color color = Colors.white,
-    Color textColor = Colors.black,
-  }) {
-    return GestureDetector(
+  Widget _sectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ProfileListTile extends StatelessWidget {
+  final String icon;
+  final String title;
+  final VoidCallback onTap;
+
+  const ProfileListTile({
+    required this.icon,
+    required this.title,
+    required this.onTap,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+      title: Text(
+        title,
+        style: const TextStyle(fontSize: 16),
+      ),
       onTap: onTap,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              blurRadius: 10,
-              offset: const Offset(0, 5),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Icon(icon, color: textColor, size: 28),
-            const SizedBox(width: 16),
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 18,
-                color: textColor,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const Spacer(),
-            Icon(Icons.arrow_forward_ios, color: textColor, size: 20),
-          ],
-        ),
+      trailing: const Icon(
+        CupertinoIcons.right_chevron,
+        color: Colors.black,
       ),
     );
   }

@@ -1,4 +1,6 @@
+import 'package:authentication/presentation/search/search_screen.dart';
 import 'package:authentication/presentation/ui/chats/chat_screen.dart';
+import 'package:authentication/presentation/ui/dashboard/modules/All-Itemes/all_Items.dart';
 import 'package:authentication/presentation/ui/dashboard/widgets/clipper.dart';
 import 'package:authentication/presentation/ui/notification_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,26 +25,58 @@ class CustomAppbar extends StatelessWidget {
               Expanded(
                 child: SizedBox(
                   height: 45,
-                  child: TextField(
-                    controller: searchcontroller,
-                    cursorColor: Colors.black,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(5),
-                      prefixIcon: Icon(Icons.search),
-                      hintText: "Find your item",
-                      hintStyle: TextStyle(color: Colors.grey),
-                      filled: true,
-                      fillColor: Colors.white,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
+                  child: GestureDetector(
+                    onTap: () {
+                      // print("object");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SearchScreen();
+                          },
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        color: Colors.white,
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Row(
+                            children: [
+                              Icon(Icons.search),
+                              Text("Search your Products")
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ),
+                  // child: TextField(
+                  //   controller: searchcontroller,
+                  //   cursorColor: Colors.black,
+                  //   decoration: InputDecoration(
+                  //     contentPadding: EdgeInsets.all(5),
+                  //     prefixIcon: Icon(Icons.search),
+                  //     hintText: "Find your item",
+                  //     hintStyle: TextStyle(color: Colors.grey),
+                  //     filled: true,
+                  //     fillColor: Colors.white,
+                  //     enabledBorder: OutlineInputBorder(
+                  //       borderRadius: BorderRadius.circular(30),
+                  //       borderSide: BorderSide.none,
+                  //     ),
+                  //     focusedBorder: OutlineInputBorder(
+                  //       borderRadius: BorderRadius.circular(30),
+                  //       borderSide: BorderSide.none,
+                  //     ),
+                  //   ),
+                  // ),
                 ),
               ),
               SizedBox(width: 15),

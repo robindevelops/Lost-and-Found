@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class items extends StatelessWidget {
   final String itemname;
-  final IconData iconData;
+  final IconData? iconData;
   void Function()? onTap;
 
   items({
     super.key,
     required this.itemname,
-    required this.iconData,
+    this.iconData,
     required this.onTap,
   });
 
